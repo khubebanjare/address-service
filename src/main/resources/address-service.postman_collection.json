@@ -1,0 +1,101 @@
+{
+  "info": {
+    "name": "Address Service",
+    "_postman_id": "a1f23f2b-9d7f-4f3c-b5e5-9081address",
+    "description": "Postman collection for Address Service APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Address",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"street\": \"MG Road\",\n    \"city\": \"Pune\",\n    \"state\": \"Maharashtra\",\n    \"country\": \"India\",\n    \"landmark\": \"Near Mall\",\n    \"pinCode\": 411001\n}"
+        },
+        "url": {
+          "raw": "http://localhost:9081/api/addresses",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9081",
+          "path": ["api", "addresses"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Addresses",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:9081/api/addresses",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9081",
+          "path": ["api", "addresses"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Address By ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:9081/api/addresses/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9081",
+          "path": ["api", "addresses", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Address",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"street\": \"JM Road\",\n    \"city\": \"Pune\",\n    \"state\": \"Maharashtra\",\n    \"country\": \"India\",\n    \"landmark\": \"Near College\",\n    \"pinCode\": 411002\n}"
+        },
+        "url": {
+          "raw": "http://localhost:9081/api/addresses/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9081",
+          "path": ["api", "addresses", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Address",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:9081/api/addresses/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9081",
+          "path": ["api", "addresses", "1"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
+
