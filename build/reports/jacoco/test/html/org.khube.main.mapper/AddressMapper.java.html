@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddressMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">address-service</a> &gt; <a href="index.source.html" class="el_package">org.khube.main.mapper</a> &gt; <span class="el_source">AddressMapper.java</span></div><h1>AddressMapper.java</h1><pre class="source lang-java linenums">package org.khube.main.mapper;
+
+import org.khube.main.dto.AddressCreateDto;
+import org.khube.main.dto.AddressDto;
+import org.khube.main.entity.Address;
+
+public class AddressMapper {
+
+    private AddressMapper() {
+        // Private constructor to prevent instantiation
+    }
+
+    /**
+     * Maps AddressCreateDto to Address entity.
+     *
+     * @param addressCreateDto the DTO to map
+     * @return the mapped Address entity
+     */
+    public static Address mapToEntity(AddressCreateDto addressCreateDto) {
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        if (addressCreateDto == null) {</span>
+<span class="nc" id="L21">            return null;</span>
+        }
+
+<span class="fc" id="L24">        Address address = new Address();</span>
+<span class="fc" id="L25">        address.setStreet(addressCreateDto.getStreet());</span>
+<span class="fc" id="L26">        address.setLandmark(addressCreateDto.getLandmark());</span>
+<span class="fc" id="L27">        address.setCity(addressCreateDto.getCity());</span>
+<span class="fc" id="L28">        address.setState(addressCreateDto.getState());</span>
+<span class="fc" id="L29">        address.setCountry(addressCreateDto.getCountry());</span>
+<span class="fc" id="L30">        address.setPinCode(addressCreateDto.getPinCode());</span>
+<span class="fc" id="L31">        return address;</span>
+    }
+
+    /**
+     * Updates an existing Address entity with values from AddressCreateDto.
+     *
+     * @param dto the DTO containing new values
+     * @param entity the existing Address entity to update
+     */
+    public static void mapToUpdateEntity(AddressCreateDto dto, Address entity) {
+<span class="nc bnc" id="L41" title="All 4 branches missed.">        if (dto == null || entity == null) return;</span>
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (dto.getStreet() != null) entity.setStreet(dto.getStreet());</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (dto.getLandmark() != null) entity.setLandmark(dto.getLandmark());</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (dto.getCity() != null) entity.setCity(dto.getCity());</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (dto.getState() != null) entity.setState(dto.getState());</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (dto.getCountry() != null) entity.setCountry(dto.getCountry());</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (dto.getPinCode() != null) entity.setPinCode(dto.getPinCode());</span>
+<span class="nc" id="L49">    }</span>
+
+    /**
+     * Maps Address entity to AddressDto.
+     *
+     * @param address the entity to map
+     * @return the mapped AddressDto
+     */
+    public static AddressDto mapToDto(Address address) {
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (address == null) {</span>
+<span class="nc" id="L59">            return null;</span>
+        }
+
+<span class="fc" id="L62">        AddressDto addressDto = new AddressDto();</span>
+<span class="fc" id="L63">        addressDto.setAddressId(address.getAddressId());</span>
+<span class="fc" id="L64">        addressDto.setStreet(address.getStreet());</span>
+<span class="fc" id="L65">        addressDto.setLandmark(address.getLandmark());</span>
+<span class="fc" id="L66">        addressDto.setCity(address.getCity());</span>
+<span class="fc" id="L67">        addressDto.setState(address.getState());</span>
+<span class="fc" id="L68">        addressDto.setCountry(address.getCountry());</span>
+<span class="fc" id="L69">        addressDto.setPinCode(address.getPinCode());</span>
+<span class="fc" id="L70">        return addressDto;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

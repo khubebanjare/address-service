@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddressServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">address-service</a> &gt; <a href="index.source.html" class="el_package">org.khube.main.service.impl</a> &gt; <span class="el_source">AddressServiceImpl.java</span></div><h1>AddressServiceImpl.java</h1><pre class="source lang-java linenums">package org.khube.main.service.impl;
+
+import org.khube.main.dto.AddressCreateDto;
+import org.khube.main.dto.AddressDto;
+import org.khube.main.entity.Address;
+import org.khube.main.exception.AddressAlreadyExistsException;
+import org.khube.main.exception.AddressNotFoundException;
+import org.khube.main.mapper.AddressMapper;
+import org.khube.main.repository.AddressRepository;
+import org.khube.main.service.AddressService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class AddressServiceImpl implements AddressService {
+
+    private final AddressRepository addressRepository;
+
+    @Autowired
+<span class="fc" id="L22">    public AddressServiceImpl(AddressRepository addressRepository) {</span>
+<span class="fc" id="L23">        this.addressRepository = addressRepository;</span>
+<span class="fc" id="L24">    }</span>
+
+    /**
+     * Creates a new address based on the provided AddressCreateDto.
+     *
+     * @param addressCreateDto the DTO containing address details
+     * @return the created AddressDto
+     * @throws IllegalArgumentException if addressCreateDto is null
+     * @throws AddressAlreadyExistsException if an address with the same ID already exists
+     */
+    @Override
+    public AddressDto createAddress(AddressCreateDto addressCreateDto) {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (addressCreateDto == null){</span>
+<span class="fc" id="L37">            throw new IllegalArgumentException(&quot;Address must not be null&quot;);</span>
+        }
+
+<span class="fc" id="L40">        Address addressMap = AddressMapper.mapToEntity(addressCreateDto);</span>
+<span class="fc" id="L41">        addressRepository.findByAddressId(addressMap.getAddressId())</span>
+<span class="fc" id="L42">                .ifPresent(existingAddress -&gt; {</span>
+<span class="fc" id="L43">                    throw new AddressAlreadyExistsException(&quot;Address with ID &quot; + addressMap.getAddressId() + &quot; already exists&quot;);</span>
+                });
+<span class="fc" id="L45">        Address address = addressRepository.save(AddressMapper.mapToEntity(addressCreateDto));</span>
+<span class="fc" id="L46">        return AddressMapper.mapToDto(address);</span>
+    }
+
+    /**
+     * Fetches an address by its ID.
+     *
+     * @param addressId the ID of the address to fetch
+     * @return the AddressDto if found, or throws an exception if not found
+     * @throws AddressNotFoundException if no address with the given ID exists
+     */
+    public AddressDto fetchAddressById(Long addressId) {
+<span class="fc" id="L57">        return addressRepository.findByAddressId(addressId)</span>
+<span class="fc" id="L58">                .map(AddressMapper::mapToDto)</span>
+<span class="fc" id="L59">                .orElseThrow(() -&gt; new AddressNotFoundException(&quot;Address with ID &quot; + addressId + &quot; not found&quot;));</span>
+    }
+
+    /**
+     * Fetches all addresses from the repository.
+     *
+     * @return a list of AddressDto containing all addresses
+     */
+    public List&lt;AddressDto&gt; fetchAllAddresses() {
+<span class="fc" id="L68">        return addressRepository.findAll()</span>
+<span class="fc" id="L69">                .stream()</span>
+<span class="fc" id="L70">                .map(AddressMapper::mapToDto)</span>
+<span class="fc" id="L71">                .toList();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
